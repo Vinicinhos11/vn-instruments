@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Vendas</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Registro de Vendas</h1>
+
+    <div class="menu">
+
+        <a href="/dashboard">Dashboard</a>
+
+        <a href="/produtos">Produtos</a>
+
+        <a href="/clientes">Clientes</a>
+
+        <a href="/vendas">Vendas</a>
+
+        <a href="/logout">Sair</a>
+
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <div class="flash">
+                    {{ msg }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" class="venda-form">
+
+        <input type="text"
+        name="cliente"
+        placeholder="Cliente">
+
+        <input type="text"
+        name="produto"
+        placeholder="Produto">
+
+        <input type="number"
+        name="quantidade"
+        placeholder="Quantidade">
+
+        <button type="submit">
+            Registrar Venda
+        </button>
+
+    </form>
+
+    <table>
+
+        <tr>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Produto</th>
+            <th>Quantidade</th>
+        </tr>
+
+        {% for venda in vendas %}
+
+        <tr>
+            <td>{{ venda[0] }}</td>
+            <td>{{ venda[1] }}</td>
+            <td>{{ venda[2] }}</td>
+            <td>{{ venda[3] }}</td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</div>
+
+</body>
+</html>

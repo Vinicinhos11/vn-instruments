@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Novo Cliente</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Novo Cliente</h1>
+
+    <div class="menu">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/produtos">Produtos</a>
+        <a href="/clientes">Clientes</a>
+        <a href="/logout">Sair</a>
+    </div>
+
+    <form method="POST">
+
+        <input type="text"
+        name="nome"
+        placeholder="Nome">
+
+        <input type="email"
+        name="email"
+        placeholder="Email">
+
+        <input type="text"
+        name="telefone"
+        placeholder="Telefone">
+
+        <button type="submit">
+            Cadastrar
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

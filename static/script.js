@@ -1,0 +1,1 @@
+console.log("VN Instruments carregado!");

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1>📊 Dashboard</h1>
+
+<div class="menu">
+
+    <a href="/produtos">Produtos</a>
+
+    <a href="/clientes">Clientes</a>
+
+    <a href="/vendas">Vendas</a>
+
+    <a href="/cadastrar">Cadastrar Produto</a>
+
+    <a href="/novo_cliente">Novo Cliente</a>
+
+    <a href="/logout">Sair</a>
+
+</div>
+
+<div class="cards">
+
+    <div class="card">
+        <h2>Produtos</h2>
+        <p>{{ total_produtos }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Clientes</h2>
+        <p>{{ total_clientes }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Vendas</h2>
+        <p>{{ total_vendas }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Estoque</h2>
+        <p>{{ estoque_total }}</p>
+    </div>
+
+</div>
+
+<a class="btn" href="/">Voltar</a>
+
+</body>
+</html>

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard - VN Instruments</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#061336;
+    color:white;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:250px;
+    height:100vh;
+
+    background:#0b1c45;
+
+    padding:30px 20px;
+}
+
+.logo{
+
+    font-size:32px;
+
+    text-align:center;
+
+    color:#38bdf8;
+
+    margin-bottom:40px;
+}
+
+.sidebar a{
+
+    display:block;
+
+    text-decoration:none;
+
+    color:white;
+
+    padding:15px;
+
+    margin-bottom:10px;
+
+    border-radius:12px;
+
+    transition:.3s;
+}
+
+.sidebar a:hover{
+
+    background:#41b6f0;
+}
+
+/* CONTEÚDO */
+
+.main{
+
+    margin-left:250px;
+
+    padding:30px;
+}
+
+.topbar{
+
+    margin-bottom:30px;
+}
+
+.topbar h1{
+
+    color:#38bdf8;
+
+    font-size:42px;
+}
+
+/* CARDS */
+
+.cards{
+
+    display:flex;
+
+    gap:25px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:30px;
+}
+
+.card{
+
+    width:250px;
+
+    height:140px;
+
+    background:#1e2b46;
+
+    border-radius:20px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    box-shadow:0 4px 15px rgba(0,0,0,.25);
+}
+
+.card h3{
+
+    font-size:20px;
+
+    margin-bottom:10px;
+
+    color:#38bdf8;
+}
+
+.card p{
+
+    font-size:40px;
+
+    font-weight:bold;
+
+    color:white;
+}
+
+/* GRÁFICO */
+
+.grafico-box{
+
+    background:#1e2b46;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    margin-bottom:30px;
+
+    box-shadow:0 4px 15px rgba(0,0,0,.25);
+}
+
+.grafico-box h2{
+
+    color:#38bdf8;
+
+    margin-bottom:20px;
+}
+
+/* TABELA */
+
+.tabela-box{
+
+    background:#1e2b46;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    box-shadow:0 4px 15px rgba(0,0,0,.25);
+}
+
+.tabela-box h2{
+
+    color:#38bdf8;
+
+    margin-bottom:20px;
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+}
+
+th{
+
+    background:#41b6f0;
+
+    color:white;
+
+    padding:15px;
+}
+
+td{
+
+    background:#233252;
+
+    padding:15px;
+
+    text-align:center;
+
+    color:white;
+}
+
+tr:hover td{
+
+    background:#2d426b;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+    <div class="logo">
+        🎸 VN
+    </div>
+
+    <a href="/dashboard">📊 Dashboard</a>
+
+    <a href="/produtos">🎸 Produtos</a>
+
+    <a href="/clientes">👥 Clientes</a>
+
+    <a href="/vendas">💰 Vendas</a>
+
+    <a href="/cadastrar">➕ Cadastrar Produto</a>
+
+    <a href="/novo_cliente">👤 Novo Cliente</a>
+
+    <a href="/logout">🚪 Sair</a>
+
+</div>
+
+<!-- CONTEÚDO -->
+
+<div class="main">
+
+    <div class="topbar">
+
+        <h1>📊 Dashboard</h1>
+
+    </div>
+
+    <!-- CARDS -->
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Produtos</h3>
+            <p>{{ total_produtos }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Clientes</h3>
+            <p>{{ total_clientes }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Vendas</h3>
+            <p>{{ total_vendas }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Estoque</h3>
+            <p>{{ estoque_total }}</p>
+        </div>
+
+    </div>
+
+    <!-- GRÁFICO -->
+
+    <div class="grafico-box">
+
+        <h2>📈 Vendas por Produto</h2>
+
+        <canvas id="graficoVendas"></canvas>
+
+    </div>
+
+    <!-- RESUMO -->
+
+    <div class="tabela-box">
+
+        <h2>📋 Resumo Geral</h2>
+
+        <table>
+
+            <tr>
+                <th>Indicador</th>
+                <th>Quantidade</th>
+            </tr>
+
+            <tr>
+                <td>Total de Produtos</td>
+                <td>{{ total_produtos }}</td>
+            </tr>
+
+            <tr>
+                <td>Total de Clientes</td>
+                <td>{{ total_clientes }}</td>
+            </tr>
+
+            <tr>
+                <td>Total de Vendas</td>
+                <td>{{ total_vendas }}</td>
+            </tr>
+
+            <tr>
+                <td>Estoque Total</td>
+                <td>{{ estoque_total }}</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script>
+
+const ctx = document.getElementById('graficoVendas');
+
+new Chart(ctx, {
+
+    type:'bar',
+
+    data:{
+
+        labels:[
+            'Violão',
+            'Guitarra',
+            'Teclado',
+            'Bateria'
+        ],
+
+        datasets:[{
+
+            label:'Quantidade Vendida',
+
+            data:[12,8,5,3],
+
+            backgroundColor:'#38bdf8',
+            borderColor:'#38bdf8',
+            borderWidth:1
+
+        }]
+    },
+
+    options:{
+
+        responsive:true,
+
+        plugins:{
+            legend:{
+                labels:{
+                    color:'white'
+                }
+            }
+        },
+
+        scales:{
+
+            x:{
+                ticks:{
+                    color:'white'
+                },
+                grid:{
+                    color:'rgba(255,255,255,.1)'
+                }
+            },
+
+            y:{
+                ticks:{
+                    color:'white'
+                },
+                grid:{
+                    color:'rgba(255,255,255,.1)'
+                }
+            }
+        }
+    }
+});
+
+</script>
+
+</body>
+</html>

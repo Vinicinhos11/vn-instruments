@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Clientes</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Clientes</h1>
+
+    <div class="menu">
+
+        <a href="/dashboard">Dashboard</a>
+
+        <a href="/produtos">Produtos</a>
+
+        <a href="/clientes">Clientes</a>
+
+        <a href="/vendas">Vendas</a>
+
+        <a href="/novo_cliente">Novo Cliente</a>
+
+        <a href="/logout">Sair</a>
+
+    </div>
+
+    <table>
+
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Telefone</th>
+        </tr>
+
+        {% for c in clientes %}
+
+        <tr>
+            <td>{{ c[0] }}</td>
+            <td>{{ c[1] }}</td>
+            <td>{{ c[2] }}</td>
+            <td>{{ c[3] }}</td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</div>
+
+</body>
+</html>

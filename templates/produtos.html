@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Produtos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1>🎵 Produtos</h1>
+
+<div class="menu">
+
+    <a href="/dashboard">Dashboard</a>
+
+    <a href="/clientes">Clientes</a>
+
+    <a href="/vendas">Vendas</a>
+
+    <a href="/logout">Sair</a>
+
+    <a href="/cadastrar">Cadastrar Produto</a>
+
+    <a href="/novo_cliente">Novo Cliente</a>
+
+</div>
+
+<a class="btn" href="/cadastrar">Novo Produto</a>
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for msg in messages %}
+            <div class="flash">{{ msg }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Preço</th>
+        <th>Estoque</th>
+        <th>Ações</th>
+    </tr>
+
+    {% for p in produtos %}
+    <tr>
+        <td>{{ p.id }}</td>
+        <td>{{ p.nome }}</td>
+        <td>R$ {{ p.preco }}</td>
+        <td>{{ p.estoque }}</td>
+        <td>
+            <a class="delete" href="/deletar/{{ p.id }}">Excluir</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+<a class="btn" href="/">Voltar</a>
+
+</body>
+</html>
